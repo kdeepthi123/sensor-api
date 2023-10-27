@@ -6,16 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "node influxserver.js",
-    "dev": "node --require @babel/register influxserver.js",
+    "dev": "nodemon influxserver.js",
     "start": "babel --presets env influxserver.js --out-file server.cjs && node server.cjs"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@influxdata/influxdb-client": "^1.33.2",
     "body-parser": "^1.20.2",
     "express": "^4.18.2",
-    "influx": "^5.9.3",
     "mongoose": "^7.6.2",
     "nano": "^10.1.2"
   },
