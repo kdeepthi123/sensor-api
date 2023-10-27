@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "node influxserver.js",
-    "dev": "babel-node influxserver.js"
+    "dev": "npx babel-node influxserver.js"
   },
   "author": "",
   "license": "ISC",
