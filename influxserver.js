@@ -3,16 +3,24 @@ const bodyParser = require('body-parser');
 const nano = require('nano')('http://admin:mysecretpassword@68.180.95.222:5984'); // Replace adminusername and adminpassword with your CouchDB admin credentials
 const dbName = 'sensordata'; // Replace with your CouchDB database name
 const db = nano.use(dbName);
-
+const cors = require('cors');
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
+
 
 app.post('/api/sensor-data', async (req, res) => {
   try {
-    const { gsrReadings, heartRateReadings} = req.body;
+     const { gsrReadings, heartRateReadings, bloodOxygen, SensorName, Temperature} = req.body;
+    const timestamp = new Date().toISOString();
+
     const data = {
       gsrReadings,
-      heartRateReadings
+      heartRateReadings,
+      bloodOxygen,
+      timestamp,
+      SensorName,
+      Temperature
     }
     db.insert(data, null, (err, body) => {
       if (err) {
@@ -57,6 +65,6 @@ app.get('/api/sensor-data/:id', async (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+app.listen(port,'0.0.0.0', () => {
   console.log(`Server is running on port ${port}`);
 });
